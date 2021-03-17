@@ -159,14 +159,15 @@
                 (lam
                   arg
                   (con integer)
-                  [
-                    (lam
-                      b
-                      (con bool)
-                      [ [ [ { (builtin ifThenElse) Bool } b ] True ] False ]
+                  (let
+                    (nonrec)
+                    (termbind
+                      (strict)
+                      (vardecl b (con bool))
+                      [ [ (builtin equalsInteger) arg ] arg ]
                     )
-                    [ [ (builtin equalsInteger) arg ] arg ]
-                  ]
+                    [ [ [ { (builtin ifThenElse) Bool } b ] True ] False ]
+                  )
                 )
               )
             )
@@ -182,14 +183,15 @@
                 (lam
                   arg
                   (con bytestring)
-                  [
-                    (lam
-                      b
-                      (con bool)
-                      [ [ [ { (builtin ifThenElse) Bool } b ] True ] False ]
+                  (let
+                    (nonrec)
+                    (termbind
+                      (strict)
+                      (vardecl b (con bool))
+                      [ [ (builtin equalsByteString) arg ] arg ]
                     )
-                    [ [ (builtin equalsByteString) arg ] arg ]
-                  ]
+                    [ [ [ { (builtin ifThenElse) Bool } b ] True ] False ]
+                  )
                 )
               )
             )
@@ -4005,10 +4007,15 @@
                               (lam
                                 arg
                                 (con string)
-                                [
-                                  (lam b (con unit) Unit)
-                                  [ (builtin trace) arg ]
-                                ]
+                                (let
+                                  (nonrec)
+                                  (termbind
+                                    (strict)
+                                    (vardecl b (con unit))
+                                    [ (builtin trace) arg ]
+                                  )
+                                  Unit
+                                )
                               )
                             )
                             (datatypebind
@@ -5652,27 +5659,27 @@
                                     (lam
                                       arg
                                       (con integer)
-                                      [
-                                        (lam
-                                          b
-                                          (con bool)
+                                      (let
+                                        (nonrec)
+                                        (termbind
+                                          (strict)
+                                          (vardecl b (con bool))
                                           [
                                             [
-                                              [
-                                                { (builtin ifThenElse) Bool } b
-                                              ]
-                                              True
+                                              (builtin lessThanEqualsInteger)
+                                              arg
                                             ]
-                                            False
+                                            arg
                                           ]
                                         )
                                         [
                                           [
-                                            (builtin lessThanEqualsInteger) arg
+                                            [ { (builtin ifThenElse) Bool } b ]
+                                            True
                                           ]
-                                          arg
+                                          False
                                         ]
-                                      ]
+                                      )
                                     )
                                   )
                                 )
@@ -5803,28 +5810,27 @@
                                     (lam
                                       arg
                                       (con integer)
-                                      [
-                                        (lam
-                                          b
-                                          (con bool)
+                                      (let
+                                        (nonrec)
+                                        (termbind
+                                          (strict)
+                                          (vardecl b (con bool))
                                           [
                                             [
-                                              [
-                                                { (builtin ifThenElse) Bool } b
-                                              ]
-                                              True
+                                              (builtin greaterThanEqualsInteger)
+                                              arg
                                             ]
-                                            False
+                                            arg
                                           ]
                                         )
                                         [
                                           [
-                                            (builtin greaterThanEqualsInteger)
-                                            arg
+                                            [ { (builtin ifThenElse) Bool } b ]
+                                            True
                                           ]
-                                          arg
+                                          False
                                         ]
-                                      ]
+                                      )
                                     )
                                   )
                                 )
@@ -5840,25 +5846,24 @@
                                     (lam
                                       arg
                                       (con integer)
-                                      [
-                                        (lam
-                                          b
-                                          (con bool)
+                                      (let
+                                        (nonrec)
+                                        (termbind
+                                          (strict)
+                                          (vardecl b (con bool))
                                           [
-                                            [
-                                              [
-                                                { (builtin ifThenElse) Bool } b
-                                              ]
-                                              True
-                                            ]
-                                            False
+                                            [ (builtin greaterThanInteger) arg ]
+                                            arg
                                           ]
                                         )
                                         [
-                                          [ (builtin greaterThanInteger) arg ]
-                                          arg
+                                          [
+                                            [ { (builtin ifThenElse) Bool } b ]
+                                            True
+                                          ]
+                                          False
                                         ]
-                                      ]
+                                      )
                                     )
                                   )
                                 )
@@ -5874,24 +5879,24 @@
                                     (lam
                                       arg
                                       (con integer)
-                                      [
-                                        (lam
-                                          b
-                                          (con bool)
+                                      (let
+                                        (nonrec)
+                                        (termbind
+                                          (strict)
+                                          (vardecl b (con bool))
                                           [
-                                            [
-                                              [
-                                                { (builtin ifThenElse) Bool } b
-                                              ]
-                                              True
-                                            ]
-                                            False
+                                            [ (builtin lessThanInteger) arg ]
+                                            arg
                                           ]
                                         )
                                         [
-                                          [ (builtin lessThanInteger) arg ] arg
+                                          [
+                                            [ { (builtin ifThenElse) Bool } b ]
+                                            True
+                                          ]
+                                          False
                                         ]
-                                      ]
+                                      )
                                     )
                                   )
                                 )
