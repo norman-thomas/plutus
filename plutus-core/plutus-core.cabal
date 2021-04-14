@@ -323,7 +323,6 @@ test-suite plutus-ir-test
     main-is: Spec.hs
     hs-source-dirs: plutus-ir/test
     other-modules:
-        OptimizerSpec
         TransformSpec
         ParserSpec
         TypeSpec

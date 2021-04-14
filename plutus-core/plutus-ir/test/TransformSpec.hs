@@ -90,9 +90,6 @@ inline =
     , "builtin"
     , "constant"
     , "transitive"
-    -- We don't do beta reduction, but we could
-    , "lamapp"
-    , "letlam"
     ]
 
 
