@@ -353,13 +353,7 @@
             (hsPkgs."text" or (errorHandler.buildDepError "text"))
             ];
           buildable = true;
-          modules = [
-            "OptimizerSpec"
-            "TransformSpec"
-            "ParserSpec"
-            "TypeSpec"
-            "TestLib"
-            ];
+          modules = [ "TransformSpec" "ParserSpec" "TypeSpec" "TestLib" ];
           hsSourceDirs = [ "plutus-ir/test" ];
           mainPath = [ "Spec.hs" ];
           };
