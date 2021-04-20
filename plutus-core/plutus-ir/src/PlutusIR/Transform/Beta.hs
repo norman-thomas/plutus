@@ -14,11 +14,7 @@ import           PlutusIR
 {-|
 A single non-recursive application of the beta rule.
 
-- TODO: check if annotations are applied correctly, and
-
 -}
-
--- Local beta transformation
 betaStep
     :: Term tyname name uni fun a
     -> Term tyname name uni fun a
