@@ -88,11 +88,12 @@ compileToReadable =
 compileReadableToPlc :: Compiling m e uni fun a => Term TyName Name uni fun (Provenance a) -> m (PLCTerm uni fun a)
 compileReadableToPlc =
     NonStrict.compileNonStrictBindings
-    >=> Let.compileLets Let.Types
+    >=> Let.compileLets Let.DataTypes
     >=> Let.compileLets Let.RecTerms
     -- We introduce some non-recursive let bindings while eliminating recursive let-bindings, so we
     -- can eliminate any of them which are unused here.
     >=> simplifyTerm
+    >=> Let.compileLets Let.Types
     >=> Let.compileLets Let.NonRecTerms
     >=> lowerTerm
 

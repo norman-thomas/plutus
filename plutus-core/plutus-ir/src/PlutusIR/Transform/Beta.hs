@@ -27,17 +27,14 @@ betaStep = \case
             bindings = binding :| []
         in
             Let a NonRec bindings body
-    -- NOTE:  this transformation will break some datatype tests due to adding
-    -- new let bindings.  Should be safe to re-enable once we implement inlining
-    -- for types.  Please also see the haddock comment below.
-
-    -- TyInst a (TyAbs _ tyname kind body) typ ->
-    --     let tyVarDecl = TyVarDecl a tyname kind
-    --         tyBinding = TypeBind a tyVarDecl typ
-    --         bindings  = tyBinding :| []
-    --     in
-    --         Let a NonRec bindings body
+    TyInst a (TyAbs _ tyname kind body) typ ->
+        let tyVarDecl = TyVarDecl a tyname kind
+            tyBinding = TypeBind a tyVarDecl typ
+            bindings  = tyBinding :| []
+        in
+            Let a NonRec bindings body
     t -> t
+
 {-|
 Recursively apply the beta transformation on the code, both for the terms
 
@@ -46,16 +43,17 @@ Recursively apply the beta transformation on the code, both for the terms
     ==>
     let x : A = N in M
 @
--}
 
--- TODO:  Update haddock comment once beta-inlining for types is re-enabled.
--- and types
--- @
---     (/\ a. \(x : a) . x) {A}
---     ==>
---     let a : * = A in
---     (\ (x : A). x)
--- @
+and types
+
+@
+    (/\ a. \(x : a) . x) {A}
+    ==>
+    let a : * = A in
+    (\ (x : A). x)
+@
+
+-}
 
 beta
     :: Term tyname name uni fun a
