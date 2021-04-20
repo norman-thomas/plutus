@@ -11,6 +11,8 @@ import           PlutusPrelude
 
 import           PlutusIR
 
+import           Control.Lens  (transformOf)
+
 {-|
 A single non-recursive application of the beta rule.
 
@@ -30,4 +32,4 @@ betaStep = \case
 beta
     :: Term tyname name uni fun a
     -> Term tyname name uni fun a
-beta t = betaStep $ over termSubterms beta t
+beta = transformOf termSubterms betaStep
